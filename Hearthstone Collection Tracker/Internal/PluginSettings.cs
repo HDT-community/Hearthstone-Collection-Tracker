@@ -28,6 +28,8 @@ namespace Hearthstone_Collection_Tracker.Internal
 
         public bool EnableDesiredCardsFeature { get; set; }
 
+		public bool EnableAutoImport { get; set; }
+
         [NonSerialized]
         [XmlIgnore]
         private IList<BasicSetCollectionInfo> _activeAccountSetsInfo;

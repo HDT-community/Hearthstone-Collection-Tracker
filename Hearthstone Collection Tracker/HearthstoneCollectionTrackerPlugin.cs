@@ -146,14 +146,13 @@ namespace Hearthstone_Collection_Tracker
         {
             get
             {
-                return @"Helps user to keep track on packs progess, suggesting the packs that will most probably contain missing cards.
-				Report bugs and issues at https://github.com/HearthSim/Hearthstone-Collection-Tracker/issues";
+                return @"Helps user to keep track on packs progess, suggesting the packs that will most probably contain missing cards. Report bugs and issues at https://github.com/HearthSim/Hearthstone-Collection-Tracker/issues";
             }
         }
 
         public string ButtonText
         {
-            get { return "Settings"; }
+            get { return "Settings & Import"; }
         }
 
         public string Author

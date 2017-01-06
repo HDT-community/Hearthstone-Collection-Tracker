@@ -8,7 +8,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Icon="Internal\HSCollection.ico"
-        Title="Settings" Width="350" Height="300">
+        Title="Settings" Width="350" Height="313.473">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -97,6 +97,10 @@
         <CheckBox x:Name="CheckboxEnableDesiredCardsFeature" IsChecked="{Binding Path=Settings.EnableDesiredCardsFeature, Mode=TwoWay}"
                   Content="Use desired cards"
                   ToolTip="Controls visibility of Desired Cards feature"
+                  HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBoxEnableAutoImport" IsChecked="{Binding Path=Settings.EnableAutoImport, Mode=TwoWay}"
+                  Content="Enable Continuous Importing"
+                  ToolTip="Will import every 5 seconds while in the collection. It is not recommended to run this with multiple accounts/regions."
                   HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
     </StackPanel>
 </controls:MetroWindow>
