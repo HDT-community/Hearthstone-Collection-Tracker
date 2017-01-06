@@ -9,7 +9,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using System.Windows.Controls;
+using Hearthstone_Collection_Tracker;
+using Hearthstone_Deck_Tracker.Enums.Hearthstone;
+using Hearthstone_Deck_Tracker.Utility.Logging;
 
 namespace Hearthstone_Collection_Tracker
 {
@@ -38,9 +42,31 @@ namespace Hearthstone_Collection_Tracker
 
             Hearthstone_Deck_Tracker.API.DeckManagerEvents.OnDeckCreated.Add(HandleHearthstoneDeckUpdated);
             Hearthstone_Deck_Tracker.API.DeckManagerEvents.OnDeckUpdated.Add(HandleHearthstoneDeckUpdated);
+
+			DispatcherTimer importTimer = new DispatcherTimer();
+			importTimer.Interval = new TimeSpan(0, 0, 0, 5);
+			importTimer.Tick += ImportTimerOnTick; 
+			importTimer.IsEnabled = true;
+			importTimer.Start();
         }
 
-        private void HandleHearthstoneDeckUpdated(Deck deck)
+	    private void ImportTimerOnTick(object sender, EventArgs eventArgs)
+	    {
+			if (Hearthstone_Deck_Tracker.Core.Game.CurrentMode != Mode.COLLECTIONMANAGER || !Settings.EnableAutoImport)
+				return;
+
+			try
+			{
+				SettingsWindow.ImportHearthMirror(false);
+			}
+			catch(Exception e)
+			{
+				Log.WriteLine("Error when auto-importing in Hearthstone Collection Tracker", LogType.Warning);
+			}
+
+	    }
+
+	    private void HandleHearthstoneDeckUpdated(Deck deck)
         {
             if (deck == null || !Settings.NotifyNewDeckMissingCards)
                 return;

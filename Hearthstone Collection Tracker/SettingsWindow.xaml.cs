@@ -122,76 +122,91 @@ namespace Hearthstone_Collection_Tracker
 
         private async void ButtonImportFromGame_Click(object sender, RoutedEventArgs e)
         {
-            const string message = "1) open My Collection in Hearthstone\n2) clear card filters (make sure to change cards filter to All Cards)\n3) do not move your mouse or type after clicking \"Import\"";
-
-            var settings = new MetroDialogSettings { AffirmativeButtonText = "Import" };
-            var result =
-                await
-                this.ShowMessageAsync("Import collection from Hearthstone", message, MessageDialogStyle.AffirmativeAndNegative, settings);
-
-            if (result != MessageDialogResult.Affirmative)
-            {
-                return;
-            }
-
-            var importObject = new HearthstoneImporter();
-            importObject.ImportStepDelay = int.Parse((ComboboxImportSpeed.SelectedItem as ComboBoxItem).Tag.ToString());
-            importObject.PasteFromClipboard = CheckboxImportPasteClipboard.IsChecked.HasValue ?
-                CheckboxImportPasteClipboard.IsChecked.Value : false;
-            importObject.NonGoldenFirst = CheckboxPrioritizeFullCollection.IsChecked.HasValue ?
-                CheckboxPrioritizeFullCollection.IsChecked.Value : false;
-
-            try
-            {
-                var selectedSetToImport = ((KeyValuePair<string, string>)ComboboxImportingSet.SelectedItem).Value;
-                var collection = await importObject.Import(selectedSetToImport);
-                // close plugin window
-                if (PluginWindow != null && PluginWindow.IsVisible)
-                {
-                    PluginWindow.Close();
-                }
-                foreach(var set in collection)
-                {
-                    var existingSet = Settings.ActiveAccountSetsInfo.FirstOrDefault(s => s.SetName == set.SetName);
-                    if (existingSet == null)
-                    {
-                        Settings.ActiveAccountSetsInfo.Add(set);
-                    }
-                    else
-                    {
-                        // keep desired amount
-                        foreach(var card in set.Cards)
-                        {
-                            var existingCardInfo = existingSet.Cards.FirstOrDefault(c => c.CardId == card.CardId);
-                            if (existingCardInfo != null)
-                            {
-                                card.DesiredAmount = existingCardInfo.DesiredAmount;
-                            }
-                        }
-                        existingSet.Cards = set.Cards;
-                    }
-                }
-                this.ShowMessageAsync("Import succeed", "Your collection is successfully imported from Hearthstone!");
-            }
-            catch (ImportingException ex)
-            {
-                this.ShowMessageAsync("Importing aborted", ex.Message);
-            }
-
-            // bring settings window to front
-            if (WindowState == WindowState.Minimized)
-            {
-                WindowState = WindowState.Normal;
-            }
-
-            Activate();
-            Topmost = true;
-            Topmost = false;
-            Focus();
-
-            // save imported collection
-            HearthstoneCollectionTrackerPlugin.Settings.SaveCurrentAccount();
+            ImportHearthMirror(true);
         }
+
+	    public static void ImportHearthMirror(bool showBoxes = false)
+	    {
+
+			ImportWithHearthmirror(true);
+	    }
+	    private async void ImportWithHearthmirror(bool showboxes = false)
+	    {
+		    if (showboxes)
+		    {
+				const string message = "Make sure you are in the Collection!";
+
+				var settings = new MetroDialogSettings { AffirmativeButtonText = "Import" };
+				var result =
+					await
+					this.ShowMessageAsync("Import collection from Hearthstone", message, MessageDialogStyle.AffirmativeAndNegative, settings);
+
+				if(result != MessageDialogResult.Affirmative)
+				{
+					return;
+				}
+			}
+
+			var importObject = new HearthstoneImporter();
+			importObject.ImportStepDelay = int.Parse(( ComboboxImportSpeed.SelectedItem as ComboBoxItem ).Tag.ToString());
+			importObject.PasteFromClipboard = CheckboxImportPasteClipboard.IsChecked.HasValue ?
+				CheckboxImportPasteClipboard.IsChecked.Value : false;
+			importObject.NonGoldenFirst = CheckboxPrioritizeFullCollection.IsChecked.HasValue ?
+				CheckboxPrioritizeFullCollection.IsChecked.Value : false;
+
+			try
+			{
+				var selectedSetToImport = ( (KeyValuePair<string, string>)ComboboxImportingSet.SelectedItem ).Value;
+				var collection = await importObject.Import(selectedSetToImport);
+				// close plugin window
+				if(PluginWindow != null && PluginWindow.IsVisible)
+				{
+					PluginWindow.Close();
+				}
+				foreach(var set in collection)
+				{
+					var existingSet = Settings.ActiveAccountSetsInfo.FirstOrDefault(s => s.SetName == set.SetName);
+					if(existingSet == null)
+					{
+						Settings.ActiveAccountSetsInfo.Add(set);
+					}
+					else
+					{
+						// keep desired amount
+						foreach(var card in set.Cards)
+						{
+							var existingCardInfo = existingSet.Cards.FirstOrDefault(c => c.CardId == card.CardId);
+							if(existingCardInfo != null)
+							{
+								card.DesiredAmount = existingCardInfo.DesiredAmount;
+							}
+						}
+						existingSet.Cards = set.Cards;
+					}
+				}
+				if(showboxes)
+					this.ShowMessageAsync("Import succeed", "Your collection is successfully imported from Hearthstone!");
+			}
+			catch(ImportingException ex)
+			{
+				if(showboxes)
+					this.ShowMessageAsync("Importing aborted", ex.Message);
+			}
+
+			// bring settings window to front
+			if(WindowState == WindowState.Minimized)
+			{
+				WindowState = WindowState.Normal;
+			}
+
+			Activate();
+			Topmost = true;
+			Topmost = false;
+			Focus();
+
+			// save imported collection
+			HearthstoneCollectionTrackerPlugin.Settings.SaveCurrentAccount();
+		}
 
         private void ButtonEditAccount_Click(object sender, RoutedEventArgs e)
         {
