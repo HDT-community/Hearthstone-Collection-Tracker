@@ -32,8 +32,8 @@ namespace Hearthstone_Collection_Tracker.Internal.Importing
         public bool PasteFromClipboard { get; set; }
 
         public bool NonGoldenFirst { get; set; }
-
-        public async Task<List<BasicSetCollectionInfo>> Import(string importingSet)
+		
+		public async Task<List<BasicSetCollectionInfo>> Import(string importingSet)
         {
             var sets = SetCardsManager.CreateEmptyCollection();
             if (!string.IsNullOrEmpty(importingSet))

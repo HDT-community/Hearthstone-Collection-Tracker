@@ -6,6 +6,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -35,9 +36,6 @@ namespace Hearthstone_Collection_Tracker
             this.DataContext = this;
             var setsOption = SetCardsManager.CollectableSets.Select(s => new KeyValuePair<string, string>(s, s)).ToList();
             setsOption.Insert(0, new KeyValuePair<string, string>("All", null));
-            ComboboxImportingSet.ItemsSource = setsOption;
-
-            CheckboxImportPasteClipboard.IsChecked = Config.Instance.ExportPasteClipboard || !Helper.LatinLanguages.Contains(Config.Instance.SelectedLanguage);
         }
 
         private void UpdateAccountsComboBox()
@@ -125,50 +123,36 @@ namespace Hearthstone_Collection_Tracker
             ImportHearthMirror(true);
         }
 
-	    public static void ImportHearthMirror(bool showBoxes = false)
+	    public async void ImportHearthMirror(bool showBoxes = false)
 	    {
 
-			ImportWithHearthmirror(true);
+			await ImportWithHearthmirror(Settings);
 	    }
-	    private async void ImportWithHearthmirror(bool showboxes = false)
+	    public static async Task<bool> ImportWithHearthmirror(PluginSettings theSettings)
 	    {
-		    if (showboxes)
-		    {
-				const string message = "Make sure you are in the Collection!";
-
-				var settings = new MetroDialogSettings { AffirmativeButtonText = "Import" };
-				var result =
-					await
-					this.ShowMessageAsync("Import collection from Hearthstone", message, MessageDialogStyle.AffirmativeAndNegative, settings);
-
-				if(result != MessageDialogResult.Affirmative)
-				{
-					return;
-				}
-			}
-
 			var importObject = new HearthstoneImporter();
-			importObject.ImportStepDelay = int.Parse(( ComboboxImportSpeed.SelectedItem as ComboBoxItem ).Tag.ToString());
-			importObject.PasteFromClipboard = CheckboxImportPasteClipboard.IsChecked.HasValue ?
-				CheckboxImportPasteClipboard.IsChecked.Value : false;
-			importObject.NonGoldenFirst = CheckboxPrioritizeFullCollection.IsChecked.HasValue ?
-				CheckboxPrioritizeFullCollection.IsChecked.Value : false;
+			importObject.ImportStepDelay = 60;
+
+
+		    //MessageBox.Show(importObject.ImportStepDelay.ToString());
+			
+
+			//importObject.PasteFromClipboard = CheckboxImportPasteClipboard.IsChecked.HasValue ?
+				//CheckboxImportPasteClipboard.IsChecked.Value : false;
+			//importObject.NonGoldenFirst = CheckboxPrioritizeFullCollection.IsChecked.HasValue ?
+				//CheckboxPrioritizeFullCollection.IsChecked.Value : false;
 
 			try
 			{
-				var selectedSetToImport = ( (KeyValuePair<string, string>)ComboboxImportingSet.SelectedItem ).Value;
+				var selectedSetToImport = new KeyValuePair<string, string>("All", "").Value;
 				var collection = await importObject.Import(selectedSetToImport);
 				// close plugin window
-				if(PluginWindow != null && PluginWindow.IsVisible)
-				{
-					PluginWindow.Close();
-				}
 				foreach(var set in collection)
 				{
-					var existingSet = Settings.ActiveAccountSetsInfo.FirstOrDefault(s => s.SetName == set.SetName);
+					var existingSet = theSettings.ActiveAccountSetsInfo.FirstOrDefault(s => s.SetName == set.SetName);
 					if(existingSet == null)
 					{
-						Settings.ActiveAccountSetsInfo.Add(set);
+						theSettings.ActiveAccountSetsInfo.Add(set);
 					}
 					else
 					{
@@ -184,29 +168,17 @@ namespace Hearthstone_Collection_Tracker
 						existingSet.Cards = set.Cards;
 					}
 				}
-				if(showboxes)
-					this.ShowMessageAsync("Import succeed", "Your collection is successfully imported from Hearthstone!");
 			}
 			catch(ImportingException ex)
 			{
-				if(showboxes)
-					this.ShowMessageAsync("Importing aborted", ex.Message);
+				return false;
 			}
 
-			// bring settings window to front
-			if(WindowState == WindowState.Minimized)
-			{
-				WindowState = WindowState.Normal;
-			}
-
-			Activate();
-			Topmost = true;
-			Topmost = false;
-			Focus();
 
 			// save imported collection
 			HearthstoneCollectionTrackerPlugin.Settings.SaveCurrentAccount();
-		}
+		    return true;
+	    }
 
         private void ButtonEditAccount_Click(object sender, RoutedEventArgs e)
         {

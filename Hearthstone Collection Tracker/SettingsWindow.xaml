@@ -25,28 +25,9 @@
                         <TextBlock FontWeight="Bold">Warning!</TextBlock>
                         <TextBlock> Current account's selected set will be cleared.</TextBlock>
                     </TextBlock>
-                    <DockPanel Margin="5,5,10,0">
-                        <Label Content="Importing set:" />
-                        <ComboBox Name="ComboboxImportingSet" HorizontalAlignment="Right" Width="150" SelectedIndex="0" DisplayMemberPath="Key">
-                        </ComboBox>
-                    </DockPanel>
-                    <DockPanel Margin="5,5,10,0">
-                        <Label Content="Speed:" />
-                        <ComboBox Name="ComboboxImportSpeed" SelectedIndex="1"
-                                                  HorizontalAlignment="Right" Width="150">
-                            <ComboBoxItem Tag="60">Fast (60ms)</ComboBoxItem>
-                            <ComboBoxItem Tag="100">Normal (100ms)</ComboBoxItem>
-                            <ComboBoxItem Tag="150">Slow (150ms)</ComboBoxItem>
-                        </ComboBox>
-                    </DockPanel>
-                    <CheckBox x:Name="CheckboxPrioritizeFullCollection"
-                              Content="Prioritize filling non-golden cards"
-                              ToolTip="For example, if checked: if you have 1 Wrath and 1 Golden Wrath, it will be imported as 2 Wrarths and 0 Golden Wraths"
-                              HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
-                    <CheckBox x:Name="CheckboxImportPasteClipboard"
-                              Content="Paste names from clipboard"
-                              ToolTip="Try this if you have problems with importing - May not work with all keyboard layouts"
-                              HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                    <TextBlock Margin="5,5,10,0" Padding="5, 0, 0, 0">
+                        <TextBlock>Make sure you are in the collection!</TextBlock>
+                    </TextBlock>
                     <Button Name="ButtonImportFromGame" Margin="10,15,10,0" Click="ButtonImportFromGame_Click">Start Import</Button>
                 </StackPanel>
             </controls:Flyout>

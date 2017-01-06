@@ -54,10 +54,14 @@ namespace Hearthstone_Collection_Tracker
 	    {
 			if (Hearthstone_Deck_Tracker.Core.Game.CurrentMode != Mode.COLLECTIONMANAGER || !Settings.EnableAutoImport)
 				return;
-
 			try
 			{
-				SettingsWindow.ImportHearthMirror(false);
+				//SettingsWindow.ImportHearthMirror(false);
+				var importWithHearthmirror = SettingsWindow.ImportWithHearthmirror(Settings);
+				if (importWithHearthmirror.Result == false)
+				{
+					throw new NullReferenceException("error");
+				}
 			}
 			catch(Exception e)
 			{
