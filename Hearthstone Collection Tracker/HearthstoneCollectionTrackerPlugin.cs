@@ -190,7 +190,7 @@ namespace Hearthstone_Collection_Tracker
             get { return "Vasilev Konstantin & the Community"; }
         }
 
-        public static readonly Version PluginVersion = new Version(0, 6, 8);
+        public static readonly Version PluginVersion = new Version(0, 6, 9);
 
         public Version Version
         {
