@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace Hearthstone_Collection_Tracker.Internal.DataUpdaters
 {
-    class DataUpdaterV069 : IDataUpdater
+    class DataUpdaterV071 : IDataUpdater
     {
-        private static readonly Version _version = new Version(0, 6, 9);
+        private static readonly Version _version = new Version(0, 7, 1);
 
         public Version Version
         {
