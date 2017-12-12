@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hearthstone Collection Tracker", "Hearthstone Collection Tracker\Hearthstone Collection Tracker.csproj", "{14B0D152-BFF1-44EB-B25E-A5DED94E1F95}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearthMirror", "HearthMirror\HearthMirror\HearthMirror.csproj", "{1694A2F8-645A-4263-A6AB-FC26323FD675}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearthDb", "HearthDb\HearthDb\HearthDb.csproj", "{7ED14243-E02B-4B94-AF00-A67A62C282F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,30 +27,6 @@ Global
 		{14B0D152-BFF1-44EB-B25E-A5DED94E1F95}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14B0D152-BFF1-44EB-B25E-A5DED94E1F95}.Release|x86.ActiveCfg = Release|Any CPU
 		{14B0D152-BFF1-44EB-B25E-A5DED94E1F95}.Release|x86.Build.0 = Release|Any CPU
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.Debug|x86.ActiveCfg = Debug|x86
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.Debug|x86.Build.0 = Debug|x86
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.PluginsFolder|Any CPU.ActiveCfg = Release|Any CPU
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.PluginsFolder|Any CPU.Build.0 = Release|Any CPU
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.PluginsFolder|x86.ActiveCfg = Release|x86
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.PluginsFolder|x86.Build.0 = Release|x86
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.Release|x86.ActiveCfg = Release|x86
-		{1694A2F8-645A-4263-A6AB-FC26323FD675}.Release|x86.Build.0 = Release|x86
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.Debug|x86.ActiveCfg = Debug|x86
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.Debug|x86.Build.0 = Debug|x86
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.PluginsFolder|Any CPU.ActiveCfg = Release|Any CPU
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.PluginsFolder|Any CPU.Build.0 = Release|Any CPU
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.PluginsFolder|x86.ActiveCfg = Release|x86
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.PluginsFolder|x86.Build.0 = Release|x86
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.Release|x86.ActiveCfg = Release|x86
-		{7ED14243-E02B-4B94-AF00-A67A62C282F0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
