@@ -61,10 +61,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="HearthDb">
-      <HintPath>..\HearthDb\HearthDb.dll</HintPath>
+      <HintPath>packages\HearthDb.dll</HintPath>
     </Reference>
     <Reference Include="HearthMirror">
-      <HintPath>..\HearthMirror\HearthMirror.dll</HintPath>
+      <HintPath>packages\HearthMirror.dll</HintPath>
     </Reference>
     <Reference Include="HearthstoneDeckTracker, Version=1.1.4.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
