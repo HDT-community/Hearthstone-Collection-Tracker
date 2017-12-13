@@ -13,8 +13,7 @@ artifacts:
   name: Release-dll
 - path: Hearthstone Collection Tracker\bin\Debug\HearthstoneCollectionTracker.dll
   name: Debug-dll
-artifacts:
-  - path: Hearthstone Collection Tracker\packages\HearthDb.dll
-    name: HearthDb.dll
-  - path: Hearthstone Collection Tracker\packages\HearthMirror.dll
-    name: HearthMirror.dll
+- path: Hearthstone Collection Tracker\packages\HearthDb.dll
+  name: HearthDb
+- path: Hearthstone Collection Tracker\packages\HearthMirror.dll
+  name: HearthMirror
